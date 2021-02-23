@@ -1,0 +1,26 @@
+{
+  "name": "nativescript-uxcam",
+  "version": "1.0.0-beta.0",
+  "description": "NativeScript plugin for UXCam.",
+  "license": "MIT",
+  "author": "UXCam",
+  "homepage": "",
+  "repository": "",
+  "main": "index",
+  "typings": "index.d.ts",
+  "nativescript": {
+    "platforms": {
+      "ios": "3.0.0",
+      "android": "3.0.0"
+    }
+  },
+  "keywords": [
+    "uxcam",
+    "ux-cam",
+    "native-script",
+    "android",
+    "ios",
+    "user-sessions",
+    "ux"
+  ]
+}
