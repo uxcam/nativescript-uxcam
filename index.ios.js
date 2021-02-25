@@ -82,6 +82,18 @@ export class NSUXCam {
         UXCam.optIntoSchematicRecordings();
     }
 
+    static optIntoVideoRecording() {
+        UXCam.optIntoSchematicRecordings();
+    }
+
+    static optOutOfVideoRecording() {
+        UXCam.optOutOfSchematicRecordings();
+    }
+
+    static optInVideoRecordingStatus(){
+        return UXCam.optInSchematicRecordingStatus();
+    }
+
     static optInOverallStatus() {
         return UXCam.optInOverallStatus();
     }

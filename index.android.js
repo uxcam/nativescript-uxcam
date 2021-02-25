@@ -102,13 +102,24 @@ export class NSUXCam {
         // IOS only API - Placeholder function
     }
 
+    static optIntoVideoRecording() {
+        UXCam.optIntoVideoRecording();
+    }
+
+    static optOutOfVideoRecording() {
+        UXCam.optOutOfVideoRecording();
+    }
+
+    static optInVideoRecordingStatus(){
+        return UXCam.optInVideoRecordingStatus();
+    }
+
     static optInOverallStatus() {
         return UXCam.optInOverallStatus();
     }
 
     static optInSchematicRecordingStatus() {
-        return false;
-        // IOS only API - Placeholder function
+        return UXCam.optInOverallStatus();
     }
 
     static cancelCurrentSession() {

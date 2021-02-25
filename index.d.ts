@@ -145,6 +145,22 @@ export declare class NSUXCam {
     static optIntoSchematicRecordings: () => void;
 
     /**
+     *  This will opt this device into video recording for future sessions.
+     */
+    static optIntoVideoRecording: () => void;
+
+    /**
+     *  This will opt this device out of video recording for future sessions.
+     */
+    static optOutOfVideoRecording: () => void;
+
+    /**
+     *  Returns the opt-in video status of this device
+     *  @return `true` if the device is opted in for video recordings, `false` otherwise.
+     */
+    static optInVideoRecordingStatus: () => boolean;
+
+    /**
      *  Returns the opt-in status of this device
      *  @return `true` if the device is opted in to session recordings, `false` otherwise. The default is `false`.
      */
