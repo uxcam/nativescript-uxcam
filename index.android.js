@@ -91,7 +91,7 @@ export class NSUXCam {
     }
 
     static optOutOfSchematicRecordings() {
-        // Not required just a placeholder function
+        // IOS only API - Placeholder function
     }
 
     static optInOverall() {
@@ -99,7 +99,7 @@ export class NSUXCam {
     }
 
     static optIntoSchematicRecordings() {
-        // Not required just a placeholder function
+        // IOS only API - Placeholder function
     }
 
     static optInOverallStatus() {
@@ -108,7 +108,7 @@ export class NSUXCam {
 
     static optInSchematicRecordingStatus() {
         return false;
-        // Not required just a placeholder function
+        // IOS only API - Placeholder function
     }
 
     static cancelCurrentSession() {
@@ -133,6 +133,10 @@ export class NSUXCam {
 
     static pendingSessionCount() {
         return UXCam.pendingSessionCount();
+    }
+
+    static uploadPendingSession() {
+        // IOS only API - Placeholder function
     }
 
     static occludeSensitiveView(sensitiveView){

@@ -114,6 +114,10 @@ export class NSUXCam {
         return UXCam.pendingUploads();
     }
 
+    static uploadPendingSession() {
+        UXCam.uploadingPendingSessions(null);
+    }
+
     static occludeSensitiveView(sensitiveView){
         if (sensitiveView){
             UXCam.occludeSensitiveView(sensitiveView.nativeView);
