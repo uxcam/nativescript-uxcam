@@ -17,9 +17,23 @@ NSUXCam.startWithKey("<your-app-key>");
 ### Hiding sensitive view
 
 ```javascript
-const sensitiveView = page.getViewById("<id-of-sensitive-view");
+const sensitiveView = page.getViewById("<id-of-sensitive-view>");
 NSUXCam.occludeSensitiveView(sensitiveView);
 ```
+
+### Event logging
+
+```javascript
+// log event
+NSUXCam.logEvent("<Event name>");
+
+// log event with properties
+NSUXCam.logEventWithProperties("<Event name>", {
+    "prop-key": "<prop-value>"
+});
+```
+
+## API
 
 API | Description
 ----|----
