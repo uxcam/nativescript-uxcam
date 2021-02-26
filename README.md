@@ -19,6 +19,10 @@ NSUXCam.startWithKey("<your-app-key>");
 ```javascript
 const sensitiveView = page.getViewById("<id-of-sensitive-view>");
 NSUXCam.occludeSensitiveView(sensitiveView);
+
+// Angular - replace <elementRefToOcclude> with your element reference after page is loaded
+const sensitiveView = this.<elementRefToOcclude>.nativeElement;
+NSUXCam.occludeSensitiveView(sensitiveView);
 ```
 
 ### Event logging
