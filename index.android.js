@@ -1,9 +1,9 @@
 var UXCam = com.uxcam.UXCam
 
-//v6
+// <=v6.1
 // const applicationModule = require("tns-core-modules/application");
 
-//v7 and v6.2+
+// v6.2+
 const applicationModule = require("@nativescript/core/application");
 
 export class NSUXCam {
