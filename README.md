@@ -1,7 +1,7 @@
 # NativeScript UXCam
 
 ## Installation
-`$tns plugin add file:/path-to-the-plugin`
+`tns plugin add nativescript-uxcam`
 
 ## Usage
 
