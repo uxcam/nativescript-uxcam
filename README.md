@@ -3,6 +3,8 @@
 ## Installation
 `tns plugin add nativescript-uxcam`
 
+NB: UXCam on iOS needs a minimum version of iOS 10.0
+
 ## Usage
 
 ### Setup

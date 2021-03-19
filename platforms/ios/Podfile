@@ -1,1 +1,2 @@
+platform :ios, '10.0'
 pod 'UXCam', '~> 3.3.3'
