@@ -1,6 +1,7 @@
 # NativeScript UXCam
 
 ## Installation
+
 `tns plugin add nativescript-uxcam`
 
 NB: UXCam on iOS needs a minimum version of iOS 10.0
@@ -10,7 +11,7 @@ NB: UXCam on iOS needs a minimum version of iOS 10.0
 ### Setup
 
 ```javascript
-import { NSUXCam } from 'nativescript-uxcam';
+import {NSUXCam} from 'nativescript-uxcam';
 
 NSUXCam.optIntoSchematicRecordings();
 NSUXCam.startWithKey("<your-app-key>");
@@ -23,8 +24,9 @@ const sensitiveView = page.getViewById("<id-of-sensitive-view>");
 NSUXCam.occludeSensitiveView(sensitiveView);
 
 // Angular - replace <elementRefToOcclude> with your element reference after page is loaded
-const sensitiveView = this.<elementRefToOcclude>.nativeElement;
-NSUXCam.occludeSensitiveView(sensitiveView);
+const sensitiveView = this.
+<elementRefToOcclude>.nativeElement;
+    NSUXCam.occludeSensitiveView(sensitiveView);
 ```
 
 ### Event logging

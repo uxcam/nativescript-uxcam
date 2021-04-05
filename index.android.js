@@ -8,14 +8,14 @@ const applicationModule = require("@nativescript/core/application");
 
 export class NSUXCam {
     static startWithKey(apiKey) {
-        if (UXCam){
+        if (UXCam) {
             var context = applicationModule.android.startActivity;
-            if (context){
-                UXCam.startApplicationWithKeyForCordova(context, apiKey);
-            }else{
+            if (context) {
+                UXCam.startWithKey(apiKey);
+            } else {
                 console.log("UXCam: Cannot get application context");
             }
-        }else{
+        } else {
             console.log("UXCam: Cannot find UXCam package");
         }
     }
@@ -29,7 +29,7 @@ export class NSUXCam {
     }
 
     static urlForCurrentSession() {
-		return UXCam.urlForCurrentSession();
+        return UXCam.urlForCurrentSession();
     }
 
     static urlForCurrentUser() {
@@ -39,11 +39,10 @@ export class NSUXCam {
     static occludeSensitiveScreen(hideScreen, hideGesture) {
         if (hideGesture) {
             UXCam.occludeSensitiveScreen(hideScreen, hideGesture);
-        }
-        else {
+        } else {
             UXCam.occludeSensitiveScreen(hideScreen);
         }
-        
+
     }
 
     static occludeAllTextFields(occludeAll) {
@@ -66,11 +65,11 @@ export class NSUXCam {
         UXCam.logEvent(eventName);
     }
 
-    static logEventWithProperties(eventName, properties){
+    static logEventWithProperties(eventName, properties) {
         var androidProps = new org.json.JSONObject();
-                    for (var key in properties) {
-                        androidProps.put(key + "", properties[key] + "");
-                    }
+        for (var key in properties) {
+            androidProps.put(key + "", properties[key] + "");
+        }
         UXCam.logEvent(eventName, androidProps)
     }
 
@@ -110,7 +109,7 @@ export class NSUXCam {
         UXCam.optOutOfVideoRecording();
     }
 
-    static optInVideoRecordingStatus(){
+    static optInVideoRecordingStatus() {
         return UXCam.optInVideoRecordingStatus();
     }
 
@@ -150,20 +149,20 @@ export class NSUXCam {
         // IOS only API - Placeholder function
     }
 
-    static occludeSensitiveView(sensitiveView){
-        if (sensitiveView){
+    static occludeSensitiveView(sensitiveView) {
+        if (sensitiveView) {
             UXCam.occludeSensitiveView(sensitiveView.nativeView);
         }
     }
 
-    static unOccludeSensitiveView(sensitiveView){
-        if (sensitiveView){
+    static unOccludeSensitiveView(sensitiveView) {
+        if (sensitiveView) {
             UXCam.unOccludeSensitiveView(sensitiveView.nativeView);
         }
     }
-    
-    static occludeSensitiveViewWithoutGesture(sensitiveView){
-        if (sensitiveView){
+
+    static occludeSensitiveViewWithoutGesture(sensitiveView) {
+        if (sensitiveView) {
             UXCam.occludeSensitiveViewWithoutGesture(sensitiveView.nativeView);
         }
     }
@@ -176,19 +175,19 @@ export class NSUXCam {
         UXCam.setAutomaticScreenNameTagging(autoScreenTagging);
     }
 
-    static addScreenNameToIgnore(screenName){
+    static addScreenNameToIgnore(screenName) {
         UXCam.addScreenNameToIgnore(screenName);
     }
 
-    static addScreenNamesToIgnore(screenName){
+    static addScreenNamesToIgnore(screenName) {
         UXCam.addScreenNamesToIgnore(screenName);
     }
 
-    static removeScreenNameToIgnore(screenName){
+    static removeScreenNameToIgnore(screenName) {
         UXCam.removeScreenNameToIgnore(screenName);
     }
 
-    static removeScreenNamesToIgnore(screenName){
+    static removeScreenNamesToIgnore(screenName) {
         UXCam.removeScreenNamesToIgnore(screenName);
     }
 
@@ -210,9 +209,9 @@ export class NSUXCam {
 
     static reportBugEventProperties(eventName, properties) {
         var androidProps = new org.json.JSONObject();
-                    for (var key in properties) {
-                        androidProps.put(key + "", properties[key] + "");
-                    }
+        for (var key in properties) {
+            androidProps.put(key + "", properties[key] + "");
+        }
         UXCam.reportBugEvent(eventName, androidProps)
     }
 }
