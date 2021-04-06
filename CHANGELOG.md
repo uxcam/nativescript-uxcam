@@ -1,8 +1,14 @@
 # Changelog
 
+## [1.0.0-beta.4] - 2021-04-05
+
+- Session not recording issue (Android) fixed
+- iOS SDK updated to v3.3.4
+
 ## [1.0.0-beta.3] - 2021-03-19
 
-- Force iOS version 10.0 in project and Podfile - UXCam requires 10.0+ on iOS
+- Force iOS version 10.0 in project and Podfile
+- UXCam requires 10.0+ on iOS
 
 ## [1.0.0-beta.2] - 2021-02-25
 
