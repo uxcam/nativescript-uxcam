@@ -9,12 +9,7 @@ const applicationModule = require("@nativescript/core/application");
 export class NSUXCam {
     static startWithKey(apiKey) {
         if (UXCam) {
-            var context = applicationModule.android.startActivity;
-            if (context) {
-                UXCam.startWithKey(apiKey);
-            } else {
-                console.log("UXCam: Cannot get application context");
-            }
+            UXCam.startWithKey(apiKey);
         } else {
             console.log("UXCam: Cannot find UXCam package");
         }
