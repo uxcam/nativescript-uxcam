@@ -9,6 +9,7 @@ const applicationModule = require("@nativescript/core/application");
 export class NSUXCam {
     static startWithKey(apiKey) {
         if (UXCam) {
+			UXCam.pluginType("nativescript", "1.0.0")
             UXCam.startWithKey(apiKey);
         } else {
             console.log("UXCam: Cannot find UXCam package");
