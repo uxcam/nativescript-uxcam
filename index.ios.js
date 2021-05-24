@@ -1,7 +1,7 @@
 
 export class NSUXCam {
     static startWithKey(apiKey) {
-		UXCam.pluginType("nativescript", "1.0.0")
+		UXCam.pluginTypeVersion("nativescript", "1.0.0")
         UXCam.startWithKey(apiKey);
     }
 
