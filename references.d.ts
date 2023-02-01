@@ -1,0 +1,1 @@
+/// <reference path="./typings/objc!UXCam.d.ts" />
