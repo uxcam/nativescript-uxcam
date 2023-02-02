@@ -18,6 +18,16 @@ export class NSUXCam {
         uxConfiguration.enableAdvancedGestureRecognition = configuration.enableAdvancedGestureRecognition ?? true;
         uxConfiguration.enableNetworkLogging = configuration.enableNetworkLogging ?? false;
 
+        if (configuration.occlusions) {
+            var settings = [];
+            for (let occlusion of configuration.occlusions) {
+                const occlusionSetting = this.occlusionSettingForOcclusion(occlusion);
+                settings.push(occlusionSetting);
+            }
+            const uxOcclusion = UXCamOcclusion.alloc().initWithSettings(settings);
+            uxConfiguration.occlusion = uxOcclusion;
+        }
+
         UXCam.startWithConfiguration(uxConfiguration);
     }
 
@@ -30,11 +40,35 @@ export class NSUXCam {
     }
 
     static applyOcclusion(occlusion) {
-        UXCam.applyOcclusion(occlusion);
+        const occlusionSetting = this.occlusionSettingForOcclusion(occlusion);
+        UXCam.applyOcclusion(occlusionSetting);
+    }
+
+    static occlusionSettingForOcclusion(occlusion) {
+        var occlusionSetting;
+        switch (occlusion.type || UXOcclusionType.Blur) {
+            case UXOcclusionType.Blur:
+                let blurRadius = occlusion.blurRadius || 10;
+                occlusionSetting = UXCamBlurSetting.alloc().initWithRadius(blurRadius);
+                break;
+            case UXOcclusionType.Overlay:
+                occlusionSetting = UXCamOverlaySetting.new();
+                break;
+            case UXOcclusionType.OccludeAllTextFields:
+                occlusionSetting = UXCamOccludeAllTextFields.new();
+                break;
+            default:
+                occlusionSetting = UXCamBlurSetting.new();
+        }
+        return occlusionSetting;
     }
 
     static removeOcclusion(occlusion) {
-        UXCam.removeOcclusion(occlusion);
+        if (occlusion.type) {
+            UXCam.removeOcclusionOfType(occlusion.type);
+        } else {
+            UXCam.removeOcclusion();
+        }
     }
 
      /**
