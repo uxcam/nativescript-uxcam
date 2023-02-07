@@ -1,4 +1,5 @@
 var UXCam = com.uxcam.UXCam
+var UXConfig = com.uxcam.datamodel.UXConfig;
 
 // <=v6.1
 // const applicationModule = require("tns-core-modules/application");
@@ -17,8 +18,20 @@ export class NSUXCam {
      *  @parameter configuration   The configuration to identify your UXCam app - find appKey in the UXCam dashboard for your account 
      */
     static startWithConfiguration(configuration) {
-        UXCam.pluginTypeVersion(PLUGIN_NAME, PLUGIN_VERSION)
-        UXCam.startWithConfiguration(configuration);
+        UXCam.pluginType(PLUGIN_NAME, PLUGIN_VERSION);
+        var uxConfigBuilder = new UXConfig.Builder(configuration.userAppKey);
+        if (configuration.enableMultiSessionRecord !== undefined) {
+            uxConfigBuilder.enableMultiSessionRecord(configuration.enableMultiSessionRecord);
+        }
+        if (configuration.enableCrashHandling !== undefined)
+            uxConfigBuilder.enableCrashHandling(configuration.enableCrashHandling);
+        if (configuration.enableAutomaticScreenNameTagging !== undefined)
+            uxConfigBuilder.enableAutomaticScreenNameTagging(configuration.enableAutomaticScreenNameTagging);
+        if (configuration.enableImprovedScreenCapture !== undefined) {
+            uxConfigBuilder.enableImprovedScreenCapture(configuration.enableImprovedScreenCapture);
+        }
+        var config = uxConfigBuilder.build();
+        UXCam.startWithConfigurationCrossPlatform(applicationModule.android.startActivity, config);
     }
 
     static async configurationForUXCam() {
@@ -44,8 +57,8 @@ export class NSUXCam {
      *  @parameter userAppKey   The key to identify your UXCam app - find it in the UXCam dashboard for your account 
      */
     static startWithKey(appKey) {
-        UXCam.pluginTypeVersion(PLUGIN_NAME, PLUGIN_VERSION)
-		UXCam.startWithKey(appKey);
+        const configuration = { userAppKey: appKey };
+        NSUXCam.startWithConfiguration(configuration);
     }
 
     /**
