@@ -1,3 +1,8 @@
+export enum UXOcclusionType {
+    OccludeAllTextFields = 1,
+    Overlay = 2,
+    Blur = 3
+}
 
 export default interface UXOcclusion {
     readonly type: UXOcclusionType;
