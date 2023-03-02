@@ -1,5 +1,9 @@
 var UXCam = com.uxcam.UXCam
 var UXConfig = com.uxcam.datamodel.UXConfig;
+var UXCamBlur = com.uxcam.screenshot.model.UXCamBlur;
+var UXCamOverlay = com.uxcam.screenshot.model.UXCamOverlay;
+//var UXCamOcclusion = com.uxcam.screenshot.model.UXCamOcclusion;
+var UXCamOccludeAllTextFields = com.uxcam.screenshot.model.UXCamOccludeAllTextFields;
 
 // <=v6.1
 // const applicationModule = require("tns-core-modules/application");
@@ -30,8 +34,38 @@ export class NSUXCam {
         if (configuration.enableImprovedScreenCapture !== undefined) {
             uxConfigBuilder.enableImprovedScreenCapture(configuration.enableImprovedScreenCapture);
         }
+
+        if (configuration.occlusions) {
+            var occlusionList = new java.util.ArrayList();
+            for (let occlusion of configuration.occlusions) {
+                const occlusionSetting = this.occlusionBuilderForOcclusion(occlusion).build();
+                occlusionList.add(occlusionSetting);
+            }
+            uxConfigBuilder.occlusions(occlusionList);
+        }
+
         var config = uxConfigBuilder.build();
         UXCam.startWithConfigurationCrossPlatform(applicationModule.android.startActivity, config);
+    }
+
+    static occlusionBuilderForOcclusion(occlusion) {
+        var occlusionBuilder;
+        switch (occlusion.type || 3) {
+            case 3:
+                let blurRadius = occlusion.blurRadius || 10;
+                occlusionBuilder = new UXCamBlur.Builder();
+                occlusionBuilder.blurRadius(blurRadius);
+                break;
+            case 2:
+                occlusionBuilder = new UXCamOverlay.Builder();
+                break;
+            case 1:
+                occlusionBuilder = UXCamOccludeAllTextFields.Builder();
+                break;
+            default:
+                occlusionBuilder = new UXCamBlur.Builder();
+        }
+        return occlusionBuilder;
     }
 
     static async configurationForUXCam() {
