@@ -19,13 +19,16 @@ export class NSUXCam {
         uxConfiguration.enableNetworkLogging = configuration.enableNetworkLogging ?? false;
 
         if (configuration.occlusions) {
-            var settings = [];
+            var uxOcclusion = UXCamOcclusion.alloc().init();
             for (let occlusion of configuration.occlusions) {
                 const occlusionSetting = this.occlusionSettingForOcclusion(occlusion);
-                settings.push(occlusionSetting);
+                
+                var screens = occlusion.screens || [];
+                var exclude = occlusion.excludeMentionedScreens || false;
+                uxOcclusion.applySettingsScreensExcludeMentionedScreens([occlusionSetting], screens, exclude);
             }
-            const uxOcclusion = UXCamOcclusion.alloc().initWithSettings(settings);
-            uxConfiguration.occlusion = uxOcclusion;
+           
+           uxConfiguration.occlusion = uxOcclusion;
         }
 
         UXCam.startWithConfiguration(uxConfiguration);
