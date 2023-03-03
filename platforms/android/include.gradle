@@ -9,5 +9,5 @@ rootProject.allprojects {
 }
 
 dependencies {
-    implementation 'com.uxcam:uxcam:3.6.2'
+    implementation 'com.uxcam:uxcam:3.6.0'
 }
