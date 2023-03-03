@@ -21,8 +21,8 @@ export class NSUXCam {
         if (configuration.occlusions) {
             var uxOcclusion = UXCamOcclusion.alloc().init();
             for (let occlusion of configuration.occlusions) {
-                const occlusionSetting = this.occlusionSettingForOcclusion(occlusion);
-                
+                var occlusionSetting = this.occlusionSettingForOcclusion(occlusion);
+                occlusionSetting.hideGestures = occlusion.hideGestures || false;
                 var screens = occlusion.screens || [];
                 var exclude = occlusion.excludeMentionedScreens || false;
                 uxOcclusion.applySettingsScreensExcludeMentionedScreens([occlusionSetting], screens, exclude);
