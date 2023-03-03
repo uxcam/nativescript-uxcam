@@ -2,7 +2,6 @@ var UXCam = com.uxcam.UXCam
 var UXConfig = com.uxcam.datamodel.UXConfig;
 var UXCamBlur = com.uxcam.screenshot.model.UXCamBlur;
 var UXCamOverlay = com.uxcam.screenshot.model.UXCamOverlay;
-//var UXCamOcclusion = com.uxcam.screenshot.model.UXCamOcclusion;
 var UXCamOccludeAllTextFields = com.uxcam.screenshot.model.UXCamOccludeAllTextFields;
 
 // <=v6.1
@@ -38,7 +37,19 @@ export class NSUXCam {
         if (configuration.occlusions) {
             var occlusionList = new java.util.ArrayList();
             for (let occlusion of configuration.occlusions) {
-                const occlusionSetting = this.occlusionBuilderForOcclusion(occlusion).build();
+                var occlusionBuilder = this.occlusionBuilderForOcclusion(occlusion);
+                if (occlusion.screens) {
+                    var screens = new java.util.Arrays.asList(occlusion.screens);
+                    occlusionBuilder.screens(screens);
+                }
+                if (occlusion.excludeMentionedScreens) {
+                    occlusionBuilder.excludeMentionedScreens(excludeMentionedScreens);
+                }
+                if (occlusion.hideGestures) {
+                    occlusionBuilder.withoutGesture(hideGestures);
+                }
+               
+                const occlusionSetting = occlusionBuilder.build();
                 occlusionList.add(occlusionSetting);
             }
             uxConfigBuilder.occlusions(occlusionList);
