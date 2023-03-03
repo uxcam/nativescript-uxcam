@@ -45,7 +45,8 @@ export class NSUXCam {
                 if (occlusion.excludeMentionedScreens) {
                     occlusionBuilder.excludeMentionedScreens(excludeMentionedScreens);
                 }
-                if (occlusion.hideGestures) {
+                // Hide gestures is not available for textfield occlusion
+                if (occlusion.hideGestures && occlusion.type > 1) {
                     occlusionBuilder.withoutGesture(hideGestures);
                 }
                
@@ -71,7 +72,7 @@ export class NSUXCam {
                 occlusionBuilder = new UXCamOverlay.Builder();
                 break;
             case 1:
-                occlusionBuilder = UXCamOccludeAllTextFields.Builder();
+                occlusionBuilder = new UXCamOccludeAllTextFields.Builder();
                 break;
             default:
                 occlusionBuilder = new UXCamBlur.Builder();
