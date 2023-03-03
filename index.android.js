@@ -38,15 +38,15 @@ export class NSUXCam {
             var occlusionList = new java.util.ArrayList();
             for (let occlusion of configuration.occlusions) {
                 var occlusionBuilder = this.occlusionBuilderForOcclusion(occlusion);
-                if (occlusion.screens) {
+                if (occlusion.screens !== undefined) {
                     var screens = new java.util.Arrays.asList(occlusion.screens);
                     occlusionBuilder.screens(screens);
                 }
-                if (occlusion.excludeMentionedScreens) {
+                if (occlusion.excludeMentionedScreens !== undefined) {
                     occlusionBuilder.excludeMentionedScreens(excludeMentionedScreens);
                 }
                 // Hide gestures is not available for textfield occlusion
-                if (occlusion.hideGestures && occlusion.type > 1) {
+                if (occlusion.hideGestures !== undefined && occlusion.type > 1) {
                     occlusionBuilder.withoutGesture(hideGestures);
                 }
                
