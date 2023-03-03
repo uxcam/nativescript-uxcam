@@ -43,11 +43,11 @@ export class NSUXCam {
                     occlusionBuilder.screens(screens);
                 }
                 if (occlusion.excludeMentionedScreens !== undefined) {
-                    occlusionBuilder.excludeMentionedScreens(excludeMentionedScreens);
+                    occlusionBuilder.excludeMentionedScreens(occlusion.excludeMentionedScreens);
                 }
                 // Hide gestures is not available for textfield occlusion
                 if (occlusion.hideGestures !== undefined && occlusion.type > 1) {
-                    occlusionBuilder.withoutGesture(hideGestures);
+                    occlusionBuilder.withoutGesture(occlusion.hideGestures);
                 }
                
                 const occlusionSetting = occlusionBuilder.build();
