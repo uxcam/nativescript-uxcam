@@ -4,6 +4,7 @@
 
 Version   | Date |Changes
 ---------- | ---------- |  ----------
+1.0.1		 | 2023-03-03 | Added option for configuration and occlusion while startup
 1.0.0		 | 2021-05-24 | First full release
 1.0.0-beta.4 | 2021-04-05 | Session not recording issue (Android) fixed
 			 | | iOS SDK updated to v3.3.4

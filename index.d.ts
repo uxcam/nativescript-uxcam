@@ -1,13 +1,43 @@
+import UXOcclusion from "./UXOcclusion";
+
 export declare class NSUXCam {
 
     /**
      *  This will start the UXCam system, get the settings configurations from our server and start capturing the data according to the configuration.
      *
      *  @brief Start the UXCam session
-     *  @parameter userAPIKey   The key to identify your UXCam app - find it in the UXCam dashboard for your account 
+     *  @parameter configuration   The configuration to identify your UXCam app - find appKey in the UXCam dashboard for your account 
      */
-    static startWithKey: (apiKey: string) => void;
+    static startWithConfiguration: (configuration: UXConfiguration) => void;
 
+    /**
+     *  @deprecated Use {@link #startWithConfiguration(configuration)} instead to start new session
+     * 
+     *  @brief Start the UXCam session
+     *  @parameter userAppKey   The key to identify your UXCam app - find it in the UXCam dashboard for your account 
+     */
+     static startWithKey: (appKey: string) => void;
+
+    /**
+     * Returns configuration object for current session
+     */
+    static configurationForUXCam: () => Promise<UXConfiguration | undefined | null>;
+   
+    /**
+     * Update current configuration with different values
+     */
+    static updateConfiguration: (configuration: UXConfiguration) => void;
+
+    /**
+     * Apply manual occlusion to screens in the app. 
+     * This will be applied to all the screens until it is not removed manually again using {@link #removeOcclusion(occlusion)} method
+     */
+    static applyOcclusion: (occlusion: UXOcclusion) => void;
+
+    /**
+     * Remove manual occlusion from the app that was applied using {@link #applyOcclusion(occlusion)} method
+     */
+    static removeOcclusion: (occlusion: UXOcclusion) => void;
     /**
      * Starts a new session after the {@link #stopSessionAndUploadData()} method has been called.
      * This happens automatically when the app returns from background.
@@ -28,7 +58,7 @@ export declare class NSUXCam {
      *
      *  @return url path for current session or nil if no verified session is active
      */
-    static urlForCurrentSession: () => string | undefined | null;
+    static urlForCurrentSession: () => Promise<string | undefined | null>;
 
     /**
      *  Returns a URL path for showing all the current users sessions
@@ -37,7 +67,7 @@ export declare class NSUXCam {
      *
      *  @return url path for user session or nil if no verified session is active
      */
-    static urlForCurrentUser: () => string | undefined | null;
+    static urlForCurrentUser: () => Promise<string | undefined | null>;
 
     /**
         Hide / un-hide the whole screen from the recording
@@ -48,7 +78,16 @@ export declare class NSUXCam {
         @parameter hideScreen Set `true` to hide the screen from the recording, `false` to start recording the screen contents again
         @parameter hideGesture Set `true` to hide the gestures in the screen from the recording, `false` to start recording the gestures in the screen again
     */
-    static occludeSensitiveScreen(hideScreen: boolean, hideGesture?: boolean): void;
+    static occludeSensitiveScreen: (hideScreen: boolean, hideGesture?: boolean) => void;
+
+    /**
+        Hide / un-hide all UITextField views on the screen
+     
+        Call this when you want to hide the contents of all UITextFields from the screen capture. Default is `false`.
+     
+        @parameter occludeAll Set `true` to hide all UITextField views on the screen in the recording, `false` to stop occluding them from the screen recording.
+     */
+    static occludeAllTextView: () => void;
 
     /**
         Hide / un-hide all UITextField views on the screen
@@ -88,13 +127,6 @@ export declare class NSUXCam {
     static setSessionProperty: (propertyName: string, value: string | number) => void;
 
     /**
-        Insert a general event, into the timeline - stores the event with the timestamp when it was added.
-     
-        @parameter eventName Name of the event to attach to the session recording at the current time
-     */
-    static logEvent(eventName: string): void;
-
-    /**
         Insert a general event, with associated properties, into the timeline - stores the event with the timestamp when it was added.
      
         @parameter eventName Name of the event to attach to the session recording at the current time
@@ -102,7 +134,21 @@ export declare class NSUXCam {
      
         @note Only number and string property types are supported to a maximum count of 100 and maximum size per entry of 1KiB
      */
-    static logEventWithProperties(eventName: string, properties: any): void;
+    static logEvent: (eventName: string, properties?: any) => void;
+
+    /**
+        UXCam verification listener that returns success/failure status. TRUE status means the session was successfully verified and started.
+        @parameter status Function to call that will receive verification status boolean value.
+     */
+    static addVerificationListener: (status: (status: { success: boolean })=>void) => EmitterSubscription;
+
+	/**
+ 	*  @brief Call this before calling startWithKey to disable UXCam from capturing sessions that crash
+ 	*
+ 	*  @param disable `true` to disable crash capture
+ 	*  @note By default crash handling is enabled.
+ 	*/
+	static disableCrashHandling: (disable: boolean) => void;
 
     /**
      *  Returns the current recording status
@@ -145,22 +191,6 @@ export declare class NSUXCam {
     static optIntoSchematicRecordings: () => void;
 
     /**
-     *  This will opt this device into video recording for future sessions.
-     */
-    static optIntoVideoRecording: () => void;
-
-    /**
-     *  This will opt this device out of video recording for future sessions.
-     */
-    static optOutOfVideoRecording: () => void;
-
-    /**
-     *  Returns the opt-in video status of this device
-     *  @return `true` if the device is opted in for video recordings, `false` otherwise.
-     */
-    static optInVideoRecordingStatus: () => boolean;
-
-    /**
      *  Returns the opt-in status of this device
      *  @return `true` if the device is opted in to session recordings, `false` otherwise. The default is `false`.
      */
@@ -171,6 +201,42 @@ export declare class NSUXCam {
      *  @note Use in conjunction with optInOverallStatus to control the overall recording status for the device
      */
     static optInSchematicRecordingStatus: () => boolean;
+
+    /**
+     *  @Deprecated use optOutOverall() instead
+     *  This will cancel any current session recording and opt this device out of future session recordings until `optIn` is called
+     *  @note The default is to opt-in to recordings, and the default will be reset if the user un-installs and re-installs the app
+    */
+    static optOut: () => void;
+
+    /**
+     *  @Deprecated use optInOverall() instead
+     */
+    static optIn: () => void;
+
+    /**
+     *  @Deprecated use optInOverallStatus() instead
+    */
+    static optStatus: () => boolean;
+
+    /**
+    *  @brief Android only.
+    *  This will opt this device into video recording for future sessions.
+    */
+    static optIntoVideoRecording: () => void;
+
+    /**
+    *  @brief Android only.
+    *  This will opt this device out of video recording for future sessions.
+    */
+    static optOutOfVideoRecording: () => void;
+
+    /**
+     * @brief Android only.
+     *  Returns the opt-in video status of this device
+     *  @return `true` if the device is opted in for video recordings, `false` otherwise.
+     */
+    static optInVideoRecordingStatus: () => boolean;
 
     /**
      *  Cancels the recording of the current session and discards the data
@@ -185,8 +251,14 @@ export declare class NSUXCam {
      *
      *  @brief Prevent a short trip to another app causing a break in a session
      *  @param continueSession Set to `true` to continue the current session after a short trip out to another app. Default is `false` - stop the session as soon as the app enters the background.
+     *  @param continueSession For android, you can also add time to wait in `milliseconds` before finishing the session.
      */
-    static allowShortBreakForAnotherApp: (continueSession: boolean) => void;
+    static allowShortBreakForAnotherApp: (continueSession: boolean | number) => void;
+
+    /**
+     *  @brief Resume after short break. Only used in android, does nothing on iOS
+     */
+    static resumeShortBreakForAnotherApp: () => void;
 
     /**
      *  Get whether UXCam is set to automatically record a new session when the app resumes from the background
@@ -215,10 +287,10 @@ export declare class NSUXCam {
     static pendingSessionCount: () => number;
 
     /**
-     *  @brief IOS only. Uploads sessions that were pending to be uploaded
-     *
-     *  Sessions can be in the Pending state if UXCam was unable to upload them at the end of the last session. Normally they will be sent at the end of the next session.
-     */
+    *  @brief IOS only. Uploads sessions that were pending to be uploaded
+    *
+    *  Sessions can be in the Pending state if UXCam was unable to upload them at the end of the last session. Normally they will be sent at the end of the next session.
+    */
     static uploadPendingSession: () => void;
 
     /**
@@ -286,7 +358,6 @@ export declare class NSUXCam {
 
     /**
         Remove the a name from the list of screens to be ignored in automatic screen name tagging mode
-
         @param screenName The name to remove from the list of ignored screens
         @note This is a convenience method for `removeScreenNamesToIgnore([nameToRemove])`
     */
@@ -309,13 +380,7 @@ export declare class NSUXCam {
         Set the token to be used to send push notifications to the app
         @param token Push notification token
     */
-    static setPushNotificationToken: (pushToken: string) => void;
-
-    /** 
-        Send a report of a problem your app encountered to be displayed in the dashboard
-        @param eventName Name of the problem event
-    */
-    static reportBugEvent: (eventName: string) => void;
+    static setPushNotificationToken: (token: string) => void;
 
     /** 
         Send a report of a problem your app encountered to be displayed in the dashboard
@@ -323,5 +388,23 @@ export declare class NSUXCam {
         @param properties Properties object associated with the event
         @note Only number and string property types are supported to a maximum count of 100 and maximum size per entry of 1KiB
     */
-    static reportBugEventProperties: (eventName: string, properties?: any) => void;
+    static reportBugEvent: (eventName: string, properties?: any) => void;
+
+    /** 
+        Enable/Disable advanced gesture recognition like swipe and pinch gestures.
+        @param enable Set `true` to enable or `false` to disable before `startWithKey`. Default is `true`.
+        @note Disable this on iOS if you are having problems with swipes or other gestures being interrupted while recording sessions.
+    */
+    static enableAdvancedGestureRecognizers: (enable: boolean) => void;
+   
+}
+
+export interface UXConfiguration {
+    userAppKey: string;
+    enableMultiSessionRecord?: boolean;
+    enableCrashHandling?: boolean;
+    enableAutomaticScreenNameTagging?: boolean;
+    enableAdvancedGestureRecognition?: boolean;
+    enableNetworkLogging?: boolean;
+    occlusions?: UXOcclusion[];
 }
