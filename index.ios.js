@@ -150,8 +150,7 @@ export class NSUXCam {
         @parameter occludeAll Set `true` to hide all UITextField views on the screen in the recording, `false` to stop occluding them from the screen recording.
      */
     static occludeAllTextFields(occludeAll) {
-        console.log("called occlude textfield");
-        UXCam.occludeSensitiveScreen(true, true);
+        UXCam.occludeAllTextFields(occludeAll);
     }
 
     /**
@@ -173,7 +172,7 @@ export class NSUXCam {
      @note Only number and string value types are supported to a maximum size per entry of 1KiB
      */
     static setUserProperty(propertyName, value) {
-        UXCam.setUserProperty(propertyName, value);
+        UXCam.setUserPropertyValue(propertyName, value);
     }
 
     /**
@@ -185,7 +184,7 @@ export class NSUXCam {
      @note Only number and string value types are supported to a maximum size per entry of 1KiB
      */
     static setSessionProperty(propertyName, value) {
-        UXCam.setSessionProperty(propertyName, value);
+        UXCam.setSessionPropertyValue(propertyName, value);
     }
 
     /**
