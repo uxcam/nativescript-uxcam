@@ -136,9 +136,9 @@ export class NSUXCam {
     static occludeSensitiveScreen(hideScreen, hideGesture) {
         console.log("called occlude screen");
         if(typeof hideGesture !== "undefined"){
-            UXCam.occludeSensitiveScreen(hideScreen, hideGesture);
+            UXCam.occludeSensitiveScreenHideGestures(hideScreen, hideGesture);
         }else{
-            UXCam.occludeSensitiveScreen(hideScreen, true);
+            UXCam.occludeSensitiveScreen(hideScreen);
         }
     }
 
@@ -197,7 +197,7 @@ export class NSUXCam {
      */
     static logEvent(eventName, properties) {
         if(typeof properties !== "undefined" || properties !== null){
-            UXCam.logEvent(eventName, properties);
+            UXCam.logEventWithProperties(eventName, properties);
         }else{
             UXCam.logEvent(eventName);
         }
@@ -519,7 +519,7 @@ export class NSUXCam {
     */
     static reportBugEvent(eventName, properties){
         if(typeof properties !== "undefined" || properties !== null){
-            UXCam.reportBugEvent(eventName, properties);
+            UXCam.reportBugEventProperties(eventName, properties);
         }else{
             UXCam.reportBugEvent(eventName);
         }
