@@ -134,6 +134,7 @@ export class NSUXCam {
         @parameter hideGesture Set `true` to hide the gestures in the screen from the recording, `false` to start recording the gestures in the screen again
     */
     static occludeSensitiveScreen(hideScreen, hideGesture) {
+        console.log("called occlude screen");
         if(typeof hideGesture !== "undefined"){
             UXCam.occludeSensitiveScreen(hideScreen, hideGesture);
         }else{
@@ -149,7 +150,8 @@ export class NSUXCam {
         @parameter occludeAll Set `true` to hide all UITextField views on the screen in the recording, `false` to stop occluding them from the screen recording.
      */
     static occludeAllTextFields(occludeAll) {
-        UXCam.occludeAllTextFields(occludeAll);
+        console.log("called occlude textfield");
+        UXCam.occludeSensitiveScreen(true, true);
     }
 
     /**
