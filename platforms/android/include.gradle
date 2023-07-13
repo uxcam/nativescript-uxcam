@@ -9,5 +9,21 @@ rootProject.allprojects {
 }
 
 dependencies {
-    implementation 'com.uxcam:uxcam:3.6.0'
+     implementation ('com.uxcam:uxcam:3.6.10'){
+        exclude group: 'com.uxcam', module:'screenshot'
+    }
+
+     implementation ('com.uxcam:screenshot:1.0.11'){
+        exclude group: 'com.uxcam', module:'screenaction'
+        exclude group: 'androidx.core', module:'core-ktx'
+    }
+
+    implementation ('com.uxcam:screenaction:1.0.8'){
+        exclude group: 'androidx.core', module:'core-ktx'
+        exclude group: 'androidx.appcompat', module:'appcompat'
+        exclude group: 'com.google.android.material', module:'material'
+        exclude group: 'androidx.compose.ui', module:'ui'
+        exclude group: 'androidx.compose.ui', module:'ui-tooling'
+        exclude group: 'androidx.compose.ui', module:'ui-tooling-data'
+    }
 }
