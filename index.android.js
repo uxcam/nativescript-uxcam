@@ -11,7 +11,7 @@ var UXCamOccludeAllTextFields = com.uxcam.screenshot.model.UXCamOccludeAllTextFi
 const applicationModule = require("@nativescript/core/application");
 
 const PLUGIN_NAME = "nativescript";
-const PLUGIN_VERSION = "1.0.1";
+const PLUGIN_VERSION = "1.0.2";
 
 export class NSUXCam {
     /**
@@ -217,8 +217,12 @@ export class NSUXCam {
         @note Only number and string property types are supported to a maximum count of 100 and maximum size per entry of 1KiB
      */
     static logEvent(eventName, properties) {
-        if(typeof properties !== "undefined" || properties !== null){
-            UXCam.logEvent(eventName, properties);
+        if(typeof properties != "undefined" || properties != null){
+            if(properties instanceof Map){
+                 UXCam.logEvent(eventName, new org.json.JSONObject(JSON.stringify(Object.fromEntries(properties))));
+               } else if(properties instanceof Object){
+                 UXCam.logEvent(eventName, new org.json.JSONObject(JSON.stringify(properties)));
+            }
         }else{
             UXCam.logEvent(eventName);
         }
@@ -543,8 +547,12 @@ export class NSUXCam {
         @note Only number and string property types are supported to a maximum count of 100 and maximum size per entry of 1KiB
     */
     static reportBugEvent(eventName, properties){
-        if(typeof properties !== "undefined" || properties !== null){
-            UXCam.reportBugEvent(eventName, properties);
+        if(typeof properties != "undefined" || properties != null){
+            if(properties instanceof Map){
+                UXCam.reportBugEvent(eventName, new org.json.JSONObject(JSON.stringify(Object.fromEntries(properties))));
+               } else if(properties instanceof Object){
+                UXCam.reportBugEvent(eventName, new org.json.JSONObject(JSON.stringify(properties)));
+            }
         }else{
             UXCam.reportBugEvent(eventName);
         }

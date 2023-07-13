@@ -1,6 +1,6 @@
 
 const PLUGIN_NAME = "nativescript";
-const PLUGIN_VERSION = "1.0.1";
+const PLUGIN_VERSION = "1.0.2";
 
 export class NSUXCam {
     /**
@@ -134,10 +134,11 @@ export class NSUXCam {
         @parameter hideGesture Set `true` to hide the gestures in the screen from the recording, `false` to start recording the gestures in the screen again
     */
     static occludeSensitiveScreen(hideScreen, hideGesture) {
+        console.log("called occlude screen");
         if(typeof hideGesture !== "undefined"){
-            UXCam.occludeSensitiveScreen(hideScreen, hideGesture);
+            UXCam.occludeSensitiveScreenHideGestures(hideScreen, hideGesture);
         }else{
-            UXCam.occludeSensitiveScreen(hideScreen, true);
+            UXCam.occludeSensitiveScreen(hideScreen);
         }
     }
 
@@ -171,7 +172,7 @@ export class NSUXCam {
      @note Only number and string value types are supported to a maximum size per entry of 1KiB
      */
     static setUserProperty(propertyName, value) {
-        UXCam.setUserProperty(propertyName, value);
+        UXCam.setUserPropertyValue(propertyName, value);
     }
 
     /**
@@ -183,7 +184,7 @@ export class NSUXCam {
      @note Only number and string value types are supported to a maximum size per entry of 1KiB
      */
     static setSessionProperty(propertyName, value) {
-        UXCam.setSessionProperty(propertyName, value);
+        UXCam.setSessionPropertyValue(propertyName, value);
     }
 
     /**
@@ -196,7 +197,7 @@ export class NSUXCam {
      */
     static logEvent(eventName, properties) {
         if(typeof properties !== "undefined" || properties !== null){
-            UXCam.logEvent(eventName, properties);
+            UXCam.logEventWithProperties(eventName, properties);
         }else{
             UXCam.logEvent(eventName);
         }
@@ -518,7 +519,7 @@ export class NSUXCam {
     */
     static reportBugEvent(eventName, properties){
         if(typeof properties !== "undefined" || properties !== null){
-            UXCam.reportBugEvent(eventName, properties);
+            UXCam.reportBugEventProperties(eventName, properties);
         }else{
             UXCam.reportBugEvent(eventName);
         }

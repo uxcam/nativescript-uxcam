@@ -137,7 +137,7 @@ declare class UXCam extends NSObject {
 	static readonly configuration: UXCamConfiguration;
 }
 
-declare class UXCamBlurSetting extends NSObject implements UXCamOcclusionSetting {
+declare class UXCamBlurSetting extends NSObject implements UXCamOcclusionSetting, UXGestureRecordable {
 
 	static alloc(): UXCamBlurSetting; // inherited from NSObject
 
@@ -155,7 +155,7 @@ declare class UXCamBlurSetting extends NSObject implements UXCamOcclusionSetting
 
 	readonly hash: number; // inherited from NSObjectProtocol
 
-	hideGestures: boolean; // inherited from UXCamOcclusionSetting
+	hideGestures: boolean; // inherited from UXGestureRecordable
 
 	readonly isProxy: boolean; // inherited from NSObjectProtocol
 
@@ -236,8 +236,6 @@ declare class UXCamOccludeAllTextFields extends NSObject implements UXCamOcclusi
 	readonly description: string; // inherited from NSObjectProtocol
 
 	readonly hash: number; // inherited from NSObjectProtocol
-
-	hideGestures: boolean; // inherited from UXCamOcclusionSetting
 
 	readonly isProxy: boolean; // inherited from NSObjectProtocol
 
@@ -339,8 +337,6 @@ interface UXCamOcclusionSetting extends NSObjectProtocol {
 
 	category: UXOcclusionCategory;
 
-	hideGestures: boolean;
-
 	type: UXOcclusionType;
 }
 declare var UXCamOcclusionSetting: {
@@ -348,7 +344,7 @@ declare var UXCamOcclusionSetting: {
 	prototype: UXCamOcclusionSetting;
 };
 
-declare class UXCamOverlaySetting extends NSObject implements UXCamOcclusionSetting {
+declare class UXCamOverlaySetting extends NSObject implements UXCamOcclusionSetting, UXGestureRecordable {
 
 	static alloc(): UXCamOverlaySetting; // inherited from NSObject
 
@@ -364,7 +360,7 @@ declare class UXCamOverlaySetting extends NSObject implements UXCamOcclusionSett
 
 	readonly hash: number; // inherited from NSObjectProtocol
 
-	hideGestures: boolean; // inherited from UXCamOcclusionSetting
+	hideGestures: boolean; // inherited from UXGestureRecordable
 
 	readonly isProxy: boolean; // inherited from NSObjectProtocol
 
@@ -423,6 +419,15 @@ declare const enum UXEnvironment {
 
 	Release = 3
 }
+
+interface UXGestureRecordable extends NSObjectProtocol {
+
+	hideGestures: boolean;
+}
+declare var UXGestureRecordable: {
+
+	prototype: UXGestureRecordable;
+};
 
 declare const enum UXOcclusionCategory {
 
