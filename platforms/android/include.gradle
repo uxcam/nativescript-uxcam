@@ -9,6 +9,6 @@ rootProject.allprojects {
 }
 
 dependencies {
-    implementation 'com.uxcam:uxcam:3.6.24'
+    implementation 'com.uxcam:uxcam:3.6.36'
     implementation "com.squareup.okhttp3:okhttp:4.8.1"
 }
