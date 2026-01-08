@@ -1,6 +1,6 @@
 
 const PLUGIN_NAME = "nativescript";
-const PLUGIN_VERSION = "1.0.4";
+const PLUGIN_VERSION = "1.0.5";
 
 export class NSUXCam {
     /**
