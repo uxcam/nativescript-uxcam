@@ -21,6 +21,18 @@ export class NSUXCam {
      *  @parameter configuration   The configuration to identify your UXCam app - find appKey in the UXCam dashboard for your account 
      */
     static startWithConfiguration(configuration) {
+        // Check if Android context is available
+        const context = applicationModule.android.startActivity || applicationModule.android.context;
+
+        if (!context) {
+            // Defer initialization until the application launches
+            console.log("UXCam: Android context not available yet. Deferring initialization until app launch.");
+            applicationModule.on(applicationModule.launchEvent, () => {
+                NSUXCam.startWithConfiguration(configuration);
+            });
+            return;
+        }
+
         UXCam.pluginType(PLUGIN_NAME, PLUGIN_VERSION);
         var uxConfigBuilder = new UXConfig.Builder(configuration.userAppKey);
         if (configuration.enableMultiSessionRecord !== undefined) {
@@ -49,7 +61,7 @@ export class NSUXCam {
                 if (occlusion.hideGestures !== undefined && occlusion.type > 1) {
                     occlusionBuilder.withoutGesture(occlusion.hideGestures);
                 }
-               
+
                 const occlusionSetting = occlusionBuilder.build();
                 occlusionList.add(occlusionSetting);
             }
@@ -57,7 +69,7 @@ export class NSUXCam {
         }
 
         var config = uxConfigBuilder.build();
-        UXCam.startWithConfigurationCrossPlatform(applicationModule.android.startActivity, config);
+        UXCam.startWithConfigurationCrossPlatform(context, config);
     }
 
     static occlusionBuilderForOcclusion(occlusion) {
