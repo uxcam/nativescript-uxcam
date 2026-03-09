@@ -533,4 +533,12 @@ export class NSUXCam {
     static enableAdvancedGestureRecognizers(enable){
         UXCam.enableAdvancedGestureRecognizers(enable);
     }
+
+    static setJavaScriptConsoleLogCaptureEnabled(enabled) {
+        UXCam.setJavaScriptConsoleLogCaptureEnabled(enabled);
+    }
+
+    static isJavaScriptConsoleLogCaptureEnabled() {
+        return UXCam.isJavaScriptConsoleLogCaptureEnabled();
+    }
 }
