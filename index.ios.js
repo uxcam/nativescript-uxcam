@@ -18,6 +18,10 @@ export class NSUXCam {
         uxConfiguration.enableAdvancedGestureRecognition = configuration.enableAdvancedGestureRecognition ?? true;
         uxConfiguration.enableNetworkLogging = configuration.enableNetworkLogging ?? false;
 
+        if (configuration.enableJavaScriptConsoleLogCapture !== undefined) {
+            uxConfiguration.enableJavaScriptConsoleLogCapture = configuration.enableJavaScriptConsoleLogCapture;
+        }
+
         if (configuration.occlusions) {
             var uxOcclusion = UXCamOcclusion.alloc().init();
             for (let occlusion of configuration.occlusions) {
@@ -534,11 +538,4 @@ export class NSUXCam {
         UXCam.enableAdvancedGestureRecognizers(enable);
     }
 
-    static setJavaScriptConsoleLogCaptureEnabled(enabled) {
-        UXCam.setJavaScriptConsoleLogCaptureEnabled(enabled);
-    }
-
-    static isJavaScriptConsoleLogCaptureEnabled() {
-        return UXCam.isJavaScriptConsoleLogCaptureEnabled();
-    }
 }

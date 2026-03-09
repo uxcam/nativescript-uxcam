@@ -45,6 +45,9 @@ export class NSUXCam {
         if (configuration.enableImprovedScreenCapture !== undefined) {
             uxConfigBuilder.enableImprovedScreenCapture(configuration.enableImprovedScreenCapture);
         }
+        if (configuration.enableJavaScriptConsoleLogCapture !== undefined) {
+            uxConfigBuilder.enableJavaScriptConsoleLogCapture(configuration.enableJavaScriptConsoleLogCapture);
+        }
 
         if (configuration.occlusions) {
             var occlusionList = new java.util.ArrayList();
@@ -579,11 +582,4 @@ export class NSUXCam {
         UXCam.enableAdvancedGestureRecognizers(enable);
     }
 
-    static setJavaScriptConsoleLogCaptureEnabled(enabled) {
-        UXCam.setJavaScriptConsoleLogCaptureEnabled(enabled);
-    }
-
-    static isJavaScriptConsoleLogCaptureEnabled() {
-        return UXCam.isJavaScriptConsoleLogCaptureEnabled();
-    }
 }

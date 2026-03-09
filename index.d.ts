@@ -404,19 +404,6 @@ export declare class NSUXCam {
     */
     static enableAdvancedGestureRecognizers: (enable: boolean) => void;
 
-    /**
-     * Enable or disable JavaScript console log capture from WebViews.
-     * When enabled, console.log/info/warn/error/debug calls in web views will be captured.
-     * @param enabled Set `true` to enable, `false` to disable
-     */
-    static setJavaScriptConsoleLogCaptureEnabled: (enabled: boolean) => void;
-
-    /**
-     * Returns whether JavaScript console log capture is currently enabled.
-     * @return `true` if JS console log capture is enabled
-     */
-    static isJavaScriptConsoleLogCaptureEnabled: () => boolean;
-
 }
 
 export interface UXConfiguration {
@@ -426,5 +413,6 @@ export interface UXConfiguration {
     enableAutomaticScreenNameTagging?: boolean;
     enableAdvancedGestureRecognition?: boolean;
     enableNetworkLogging?: boolean;
+    enableJavaScriptConsoleLogCapture?: boolean;
     occlusions?: UXOcclusion[];
 }
