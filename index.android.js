@@ -10,6 +10,8 @@ var UXCamOccludeAllTextFields = com.uxcam.screenshot.model.UXCamOccludeAllTextFi
 // v6.2+
 const applicationModule = require("@nativescript/core/application");
 
+const { patchNSConsole } = require('./console-capture');
+
 const PLUGIN_NAME = "nativescript";
 const PLUGIN_VERSION = "1.0.5";
 
@@ -73,6 +75,13 @@ export class NSUXCam {
 
         var config = uxConfigBuilder.build();
         UXCam.startWithConfigurationCrossPlatform(context, config);
+
+        // Patch JS console to capture logs from NativeScript runtime
+        if (configuration.enableJavaScriptConsoleLogCapture !== false) {
+            patchNSConsole((level, message, source, timestamp) => {
+                UXCam.reportConsoleLog(level, message, source, timestamp);
+            });
+        }
     }
 
     static occlusionBuilderForOcclusion(occlusion) {

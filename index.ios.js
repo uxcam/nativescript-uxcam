@@ -1,3 +1,4 @@
+const { patchNSConsole } = require('./console-capture');
 
 const PLUGIN_NAME = "nativescript";
 const PLUGIN_VERSION = "1.0.5";
@@ -36,6 +37,12 @@ export class NSUXCam {
         }
 
         UXCam.startWithConfiguration(uxConfiguration);
+
+        if (configuration.enableJavaScriptConsoleLogCapture !== false) {
+            patchNSConsole((level, message, source, timestamp) => {
+                UXCam.reportConsoleLogMessageSourceTimestamp(level, message, source, timestamp);
+            });
+        }
     }
 
     static async configurationForUXCam() {
