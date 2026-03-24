@@ -4,7 +4,7 @@
 
 Version   | Date |Changes
 ---------- | ---------- |  ----------
-1.0.5		 | 2026-02-16 | Updated iOS SDK to 3.7.9 and Android SDK to 3.8.12
+1.0.5		 | 2026-03-24 | Updated iOS SDK to 3.7.11 and Android SDK to 3.8.14
 1.0.4		 | 2024-12-24 | Updated iOS SDK to 3.6.20 and Android SDK to 3.6.36
 1.0.3		 | 2024-06-24 | Updated iOS SDK to 3.6.14 and Android SDK to 3.6.24
 1.0.2		 | 2023-07-13 | Fixed few native methods not working correctly issue
