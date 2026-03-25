@@ -2,13 +2,10 @@
 
 rootProject.allprojects {
     repositories {
-        maven {
-            url 'https://sdk.uxcam.com/android/'
-        }
+        mavenCentral()
     }
 }
 
 dependencies {
-    implementation 'com.uxcam:uxcam:3.6.36'
-    implementation "com.squareup.okhttp3:okhttp:4.8.1"
+    implementation 'com.uxcam:uxcam:3.8.14'
 }
