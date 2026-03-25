@@ -1,5 +1,12 @@
 import UXOcclusion from "./UXOcclusion";
 
+export interface EmitterSubscription {
+    /**
+     * Remove the subscription from the emitter so the listener will no longer be called
+     */
+    remove: () => void;
+}
+
 export declare class NSUXCam {
 
     /**
