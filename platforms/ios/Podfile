@@ -1,1 +1,56 @@
-pod 'UXCam', '~> 3.7.11'
+
+require 'json'
+
+uxcam_cli_version = nil
+%w[ns tns].each do |bin|
+  begin
+    out = `#{bin} --version 2>/dev/null`
+    m = out.to_s[/\d+\.\d+\.\d+/]
+    if m
+      uxcam_cli_version = m
+      break
+    end
+  rescue StandardError
+    next
+  end
+end
+
+uxcam_core_version = nil
+begin
+  dir = Dir.pwd
+  8.times do
+    pkg = File.join(dir, 'node_modules', '@nativescript', 'core', 'package.json')
+    if File.exist?(pkg)
+      uxcam_core_version = JSON.parse(File.read(pkg))['version']
+      break
+    end
+    parent = File.dirname(dir)
+    break if parent == dir
+    dir = parent
+  end
+rescue StandardError
+  uxcam_core_version = nil
+end
+
+uxcam_detected = uxcam_cli_version || uxcam_core_version
+uxcam_source   = uxcam_cli_version ? 'CLI' : (uxcam_core_version ? '@nativescript/core' : 'none')
+
+uxcam_supports_spm =
+  if uxcam_detected
+    Gem::Version.new(uxcam_detected.split('-').first) >= Gem::Version.new('8.9.0')
+  else
+    true
+  end
+
+if uxcam_supports_spm
+  if defined?(Pod::UI)
+    Pod::UI.puts "[nativescript-uxcam] UXCam integrated via Swift Package Manager " \
+                 "(#{uxcam_source} #{uxcam_detected || 'unknown'})."
+  end
+else
+  if defined?(Pod::UI)
+    Pod::UI.puts "[nativescript-uxcam] #{uxcam_source} #{uxcam_detected} (< 8.9.0): " \
+                 "using CocoaPods fallback for UXCam."
+  end
+  pod 'UXCam', '~> 3.8.2'
+end
