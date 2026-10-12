@@ -4,6 +4,7 @@
 
 Version   | Date |Changes
 ---------- | ---------- |  ----------
+1.0.6		 | 2026-10-26 | Updated iOS SDK to 3.11.1 and Android SDK to 3.11.2
 1.0.5		 | 2026-03-24 | Updated iOS SDK to 3.7.11 and Android SDK to 3.8.14
 1.0.4		 | 2024-12-24 | Updated iOS SDK to 3.6.20 and Android SDK to 3.6.36
 1.0.3		 | 2024-06-24 | Updated iOS SDK to 3.6.14 and Android SDK to 3.6.24
