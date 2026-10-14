@@ -66,9 +66,15 @@ declare class UXCam extends NSObject {
 
 	static optInSchematicRecordingStatus(): boolean;
 
+	static optInVideoRecordingStatus(): boolean;
+
 	static optIntoSchematicRecordings(): void;
 
+	static optIntoVideoRecordings(): void;
+
 	static optOutOfSchematicRecordings(): void;
+
+	static optOutOfVideoRecordings(): void;
 
 	static optOutOverall(): void;
 

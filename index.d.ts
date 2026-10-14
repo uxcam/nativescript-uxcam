@@ -181,8 +181,7 @@ export declare class NSUXCam {
     static optOutOverall: () => void;
 
     /**
-     *  This will opt this device out of schematic recordings for future sessions
-     *  - any current session will be stopped and restarted with the last settings passed to `startWithKey`
+     *  @deprecated use optOutOfVideoRecordings() instead
      */
     static optOutOfSchematicRecordings: () => void;
 
@@ -193,7 +192,7 @@ export declare class NSUXCam {
     static optInOverall: () => void;
 
     /**
-     *  This will opt this device back into session recordings
+     *  @deprecated use optIntoVideoRecordings() instead
      */
     static optIntoSchematicRecordings: () => void;
 
@@ -203,9 +202,8 @@ export declare class NSUXCam {
      */
     static optInOverallStatus: () => boolean;
 
-    /** Returns the opt-in status of this device for schematic recordings
-     *  @returns `true` if the device is opted in to schematic recordings, `false` otherwise. The default is `false`.
-     *  @note Use in conjunction with optInOverallStatus to control the overall recording status for the device
+    /**
+     *  @deprecated use optInVideoRecordingStatus() instead
      */
     static optInSchematicRecordingStatus: () => boolean;
 
@@ -227,20 +225,17 @@ export declare class NSUXCam {
     static optStatus: () => boolean;
 
     /**
-    *  @brief Android only.
-    *  This will opt this device into video recording for future sessions.
-    */
-    static optIntoVideoRecording: () => void;
+     *  This will opt this device into video recordings for future sessions
+     */
+    static optIntoVideoRecordings: () => void;
 
     /**
-    *  @brief Android only.
-    *  This will opt this device out of video recording for future sessions.
-    */
-    static optOutOfVideoRecording: () => void;
+     *  This will opt this device out of video recordings for future sessions
+     */
+    static optOutOfVideoRecordings: () => void;
 
     /**
-     * @brief Android only.
-     *  Returns the opt-in video status of this device
+     *  Returns the opt-in status of this device for video recordings
      *  @return `true` if the device is opted in for video recordings, `false` otherwise.
      */
     static optInVideoRecordingStatus: () => boolean;
