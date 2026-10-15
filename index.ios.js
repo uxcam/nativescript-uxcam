@@ -17,6 +17,9 @@ export class NSUXCam {
         uxConfiguration.enableAutomaticScreenNameTagging = configuration.enableAutomaticScreenNameTagging ?? true;
         uxConfiguration.enableAdvancedGestureRecognition = configuration.enableAdvancedGestureRecognition ?? true;
         uxConfiguration.enableNetworkLogging = configuration.enableNetworkLogging ?? false;
+        if (configuration.enableImprovedWebViewCapture !== undefined) {
+            uxConfiguration.enableImprovedWebViewCapture = configuration.enableImprovedWebViewCapture;
+        }
 
         if (configuration.occlusions) {
             var uxOcclusion = UXCamOcclusion.alloc().init();
@@ -247,12 +250,11 @@ export class NSUXCam {
     }
 
     /**
-     *  This will opt this device out of schematic recordings for future sessions
-     *  - any current session will be stopped and restarted with the last settings passed to `startWithKey`
+     *  @deprecated use optOutOfVideoRecordings() instead
      */
     static optOutOfSchematicRecordings()
     {
-        UXCam.optOutOfSchematicRecordings();
+        NSUXCam.optOutOfVideoRecordings();
     }
 
     /**
@@ -265,11 +267,11 @@ export class NSUXCam {
     }
 
     /**
-     *  This will opt this device back into session recordings
+     *  @deprecated use optIntoVideoRecordings() instead
      */
     static optIntoSchematicRecordings()
     {
-        UXCam.optIntoSchematicRecordings();
+        NSUXCam.optIntoVideoRecordings();
     }
 
     /**
@@ -281,38 +283,34 @@ export class NSUXCam {
         return UXCam.optInOverallStatus();
     }
 
-    /** Returns the opt-in status of this device for schematic recordings
-     *  @returns `true` if the device is opted in to schematic recordings, `false` otherwise. The default is `false`.
-     *  @note Use in conjunction with optInOverallStatus to control the overall recording status for the device
+    /**
+     *  @deprecated use optInVideoRecordingStatus() instead
      */
     static optInSchematicRecordingStatus()
     {
-        return UXCam.optInSchematicRecordingStatus();
+        return NSUXCam.optInVideoRecordingStatus();
     }
 
     /**
-    *  @brief Android only.
-    *  This will opt this device into video recording for future sessions.
-    */
-    static optIntoVideoRecording() {
-        UXCam.optIntoSchematicRecordings();
+     *  This will opt this device into video recordings for future sessions
+     */
+    static optIntoVideoRecordings() {
+        UXCam.optIntoVideoRecordings();
     }
 
     /**
-    *  @brief Android only.
-    *  This will opt this device out of video recording for future sessions.
-    */
-    static optOutOfVideoRecording() {
-        UXCam.optOutOfSchematicRecordings();
+     *  This will opt this device out of video recordings for future sessions
+     */
+    static optOutOfVideoRecordings() {
+        UXCam.optOutOfVideoRecordings();
     }
 
     /**
-     * @brief Android only.
-     *  Returns the opt-in video status of this device
+     *  Returns the opt-in status of this device for video recordings
      *  @return `true` if the device is opted in for video recordings, `false` otherwise.
      */
-    static optInVideoRecordingStatus(){
-        return UXCam.optInSchematicRecordingStatus();
+    static optInVideoRecordingStatus() {
+        return UXCam.optInVideoRecordingStatus();
     }
 
     /**

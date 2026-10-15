@@ -13,7 +13,7 @@ NB: UXCam on iOS needs a minimum version of iOS 12.0
 ```javascript
 import { NSUXCam } from 'nativescript-uxcam';
 
-NSUXCam.optIntoSchematicRecordings();
+NSUXCam.optIntoVideoRecordings();
 const blur = {
       'type': 3,
       'hideGestures': true,
