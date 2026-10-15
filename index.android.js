@@ -45,6 +45,9 @@ export class NSUXCam {
         if (configuration.enableImprovedScreenCapture !== undefined) {
             uxConfigBuilder.enableImprovedScreenCapture(configuration.enableImprovedScreenCapture);
         }
+        if (configuration.enableImprovedWebViewCapture !== undefined) {
+            uxConfigBuilder.enableImprovedWebViewCapture(configuration.enableImprovedWebViewCapture);
+        }
 
         if (configuration.occlusions) {
             var occlusionList = new java.util.ArrayList();

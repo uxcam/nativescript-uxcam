@@ -214,6 +214,8 @@ declare class UXCamConfiguration extends NSObject {
 
 	enableCrashHandling: boolean;
 
+	enableImprovedWebViewCapture: boolean;
+
 	enableMultiSessionRecord: boolean;
 
 	enableNetworkLogging: boolean;

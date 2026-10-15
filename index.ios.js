@@ -17,6 +17,9 @@ export class NSUXCam {
         uxConfiguration.enableAutomaticScreenNameTagging = configuration.enableAutomaticScreenNameTagging ?? true;
         uxConfiguration.enableAdvancedGestureRecognition = configuration.enableAdvancedGestureRecognition ?? true;
         uxConfiguration.enableNetworkLogging = configuration.enableNetworkLogging ?? false;
+        if (configuration.enableImprovedWebViewCapture !== undefined) {
+            uxConfiguration.enableImprovedWebViewCapture = configuration.enableImprovedWebViewCapture;
+        }
 
         if (configuration.occlusions) {
             var uxOcclusion = UXCamOcclusion.alloc().init();

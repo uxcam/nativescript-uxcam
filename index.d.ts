@@ -408,5 +408,7 @@ export interface UXConfiguration {
     enableAutomaticScreenNameTagging?: boolean;
     enableAdvancedGestureRecognition?: boolean;
     enableNetworkLogging?: boolean;
+    /** Records WebView screens from the page's DOM. Experimental; set before starting UXCam. Default is `false`. */
+    enableImprovedWebViewCapture?: boolean;
     occlusions?: UXOcclusion[];
 }
