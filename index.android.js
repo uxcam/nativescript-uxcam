@@ -11,7 +11,7 @@ var UXCamOccludeAllTextFields = com.uxcam.screenshot.model.UXCamOccludeAllTextFi
 const applicationModule = require("@nativescript/core/application");
 
 const PLUGIN_NAME = "nativescript";
-const PLUGIN_VERSION = "1.0.6";
+const PLUGIN_VERSION = "1.0.7";
 
 export class NSUXCam {
     /**
