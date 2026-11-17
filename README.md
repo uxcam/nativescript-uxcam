@@ -33,7 +33,7 @@ if your app pins an older `@nativescript/core` than the CLI.
 ```javascript
 import { NSUXCam } from 'nativescript-uxcam';
 
-NSUXCam.optIntoSchematicRecordings();
+NSUXCam.optIntoVideoRecordings();
 const blur = {
       'type': 3,
       'hideGestures': true,

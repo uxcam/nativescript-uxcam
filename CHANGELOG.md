@@ -4,7 +4,12 @@
 
 Version   | Date |Changes
 ---------- | ---------- |  ----------
-1.0.6		 | 2026-06-08 | iOS now integrates UXCam via Swift Package Manager (SPM) as CocoaPods is being deprecated. Updated iOS SDK to 3.8.2. Uses SPM on NativeScript CLI 8.9.0+; the Podfile auto-detects the CLI version and falls back to CocoaPods only on older CLIs, so UXCam is never linked twice.
+1.0.7		 | 2026-11-20 | iOS now integrates UXCam via Swift Package Manager (SPM) as CocoaPods is being deprecated. 
+       | |Updated iOS SDK to 3.12.0. Uses SPM on NativeScript CLI 8.9.0+; the Podfile auto-detects the CLI version and falls back to CocoaPods only on older CLIs, so UXCam is never linked twice.
+1.0.6		 | 2026-10-26 | Updated iOS SDK to 3.11.1 and Android SDK to 3.11.3
+			 | | Added `optIntoVideoRecordings`, `optOutOfVideoRecordings` and `optInVideoRecordingStatus` for both platforms
+			 | | Deprecated `optIntoSchematicRecordings`, `optOutOfSchematicRecordings` and `optInSchematicRecordingStatus`
+			 | | Added `enableImprovedWebViewCapture` configuration option for both platforms
 1.0.5		 | 2026-03-24 | Updated iOS SDK to 3.7.11 and Android SDK to 3.8.14
 1.0.4		 | 2024-12-24 | Updated iOS SDK to 3.6.20 and Android SDK to 3.6.36
 1.0.3		 | 2024-06-24 | Updated iOS SDK to 3.6.14 and Android SDK to 3.6.24

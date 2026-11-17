@@ -52,5 +52,5 @@ else
     Pod::UI.puts "[nativescript-uxcam] #{uxcam_source} #{uxcam_detected} (< 8.9.0): " \
                  "using CocoaPods fallback for UXCam."
   end
-  pod 'UXCam', '~> 3.8.2'
+  pod 'UXCam', '~> 3.12.0'
 end
